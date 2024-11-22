@@ -8,3 +8,7 @@
   loop: "{{ firewallpolicies }}"
   loop_control:
     loop_var: item_policy
+
+- name: Print devicetype
+    debug:
+      msg: "Device type: {{ devicetype }}"
