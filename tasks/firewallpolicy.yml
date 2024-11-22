@@ -1,0 +1,5 @@
+---
+- name: edit fortigate policy
+  include_role:
+    name: subtasks/{{ devicetype }}_policy
+  when: inventory_hostname == "{{ item_policy.device }}"

@@ -1,0 +1,9 @@
+---
+# tasks file for ansible_role_firewallpolicy
+- name: implement firewallpolicies
+  with_items:
+    - "{{ firewallpolicies }}"
+  include_role:
+    name: firewallpolicy
+  vars:
+    thing: "{{ item_policy }}"

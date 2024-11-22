@@ -1,0 +1,45 @@
+---
+- name: Configuring firewall policy for Testing the automation
+  fortinet.fortios.fortios_firewall_policy:
+    access_token: "{{ access_token }}"
+    vdom: "{{ item_policy.device.split('_') | second }}"
+    state: "{{ item_policy.state }}"
+    enable_log: true
+    firewall_policy:
+      srcintf:
+        - name: "any"
+      dstintf:
+        - name: "any"
+      srcaddr:
+        - name: "all"
+      dstaddr:
+        - name: "all"
+      schedule: "always"
+      service:
+        - name: "ALL"
+      action: "{{ item_policy.action }}"
+      nat: "{{ item_policy.nat }}"
+      status: "{{ item_policy.status }}"
+      policyid: "{{ item_policy.id }}"
+      name: "{{ item_policy.name }}"
+
+- name: Move Policies
+  fortinet.fortios.fortios_firewall_policy:
+    access_token: "{{ password }}"
+    vdom: "{{ vdom }}"
+    state: "present"
+    action: move
+    self: "{{ item_policy.id }}"
+    before: "{{ before_policy }}"
+  register: result_first_task   # Register result of the first task
+  ignore_errors: yes            # Continue even if the task fails
+
+- name: Workaround for moving policies cause of bug in version 2.3.8 fortios https://github.com/fortinet-ansible-dev/ansible-galaxy-fortios-collection/issues/353
+  fortios_json_generic:
+    vdom: "{{ vdom }}"
+    json_generic:
+      method: PUT
+      path: "/api/v2/cmdb/firewall/policy/{{ item_policy.id }}"
+      jsonbody: '{}'
+      specialparams: action=move&before={{ before_policy }}&vdom={{ vdom }}
+  when: result_first_task is failed  # Run only if the first task fails

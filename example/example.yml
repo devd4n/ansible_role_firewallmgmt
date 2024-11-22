@@ -1,0 +1,10 @@
+---
+firewallpolicies:
+  - { device: "forti01", forti_vdom: "vdom1", name: "", uid: "", userobj: "", srczone: "", dstzone: "", srcobj: "", dstobj: "", dstport: "", app: "", logging: "", action: ""}
+
+firewallobjects:
+  - { type: host }
+  - { type: network }
+  - { type: port }
+  - { type: application }
+  - { type: user }
