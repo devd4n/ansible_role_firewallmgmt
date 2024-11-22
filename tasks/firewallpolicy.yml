@@ -1,4 +1,4 @@
 ---
 - name: edit fortigate policy
   include_tasks: "{{ devicetype }}_policy.yml"
-  when: inventory_hostname == "{{ item_policy.device }}"
+  when: inventory_hostname == rule_device

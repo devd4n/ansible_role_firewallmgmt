@@ -2,6 +2,8 @@
 # tasks file for ansible_role_firewallpolicy
 - name: implement firewallpolicies
   include_tasks: firewallpolicy.yml
+  vars:
+    rule_device: "{{ item_policy.device }}"
   loop: "{{ firewallpolicies }}"
   loop_control:
     loop_var: item_policy
