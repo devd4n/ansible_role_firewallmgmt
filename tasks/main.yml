@@ -3,7 +3,7 @@
 - name: implement firewallpolicies
   include_tasks: firewallpolicy.yml
   vars:
-    rule_device: "{{ item_policy.device }}"
+    rule_device: "{{ item_policy.device.split('%') | first }}"
   loop: "{{ firewallpolicies }}"
   loop_control:
     loop_var: item_policy
