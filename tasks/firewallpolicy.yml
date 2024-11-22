@@ -1,4 +1,4 @@
 ---
 - name: edit fortigate policy
-  include_tasks: "{{ devicetype }}_policy.yml"
+  include_tasks: "{{ subtask }}"
   when: inventory_hostname == rule_device

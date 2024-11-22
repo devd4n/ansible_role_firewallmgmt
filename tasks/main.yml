@@ -4,6 +4,7 @@
   include_tasks: firewallpolicy.yml
   vars:
     rule_device: "{{ item_policy.device.split('%') | first }}"
+    subtask: "{{ devicetype }}_policy.yml"
   loop: "{{ firewallpolicies }}"
   loop_control:
     loop_var: item_policy
