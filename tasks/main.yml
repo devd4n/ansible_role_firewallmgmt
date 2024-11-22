@@ -3,7 +3,6 @@
 - name: implement firewallpolicies
   with_items:
     - "{{ firewallpolicies }}"
-  include_role:
-    name: ansible_role_firewallmgmt/tasks/firewallpolicy
+  include_tasks: firewallpolicy.yml
   vars:
     thing: "{{ item_policy }}"
