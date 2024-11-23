@@ -34,7 +34,7 @@
   register: result_first_task   # Register result of the first task
   ignore_errors: yes            # Continue even if the task fails
 
-- name: Workaround for moving policies cause of bug in version 2.3.8 fortios https://github.com/fortinet-ansible-dev/ansible-galaxy-fortios-collection/issues/353
+- name: Workaround for moving policies cause of bug in version 2.3.8 fortios # https://github.com/fortinet-ansible-dev/ansible-galaxy-fortios-collection/issues/353
   fortios_json_generic:
     vdom: "{{ vdom }}"
     json_generic:
