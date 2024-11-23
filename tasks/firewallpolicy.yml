@@ -1,4 +1,4 @@
 ---
 - name: edit fortigate policy
-  include_tasks: "{{ subtask }}"
+  include_tasks: "subtasks/{{ subtask }}"
   when: inventory_hostname == rule_device
