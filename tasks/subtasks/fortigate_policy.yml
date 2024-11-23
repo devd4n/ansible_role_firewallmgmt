@@ -20,7 +20,7 @@
       action: "{{ item_policy.action }}"
       nat: "{{ item_policy.nat }}"
       status: "{{ item_policy.status }}"
-      policyid: "{{ item_policy.id }}"
+      policyid: "{{ item_policy.uid }}"
       name: "{{ item_policy.name }}"
 
 - name: Move Policies
@@ -29,7 +29,7 @@
     vdom: "{{ item_policy.device.split('%') | second }}"
     state: "present"
     action: move
-    self: "{{ item_policy.id }}"
+    self: "{{ item_policy.uid }}"
     before: "{{ before_policy }}"
   register: result_first_task   # Register result of the first task
   ignore_errors: yes            # Continue even if the task fails
