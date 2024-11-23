@@ -36,7 +36,7 @@
 
 # https://github.com/fortinet-ansible-dev/ansible-galaxy-fortios-collection/issues/353
 - name: Workaround for moving policies cause of bug in version 2.3.8 fortios
-  fortios_json_generic:
+  fortinet.fortios.fortios_json_generic:
     vdom: "{{ item_policy.device.split('%') | second }}"
     json_generic:
       method: PUT
