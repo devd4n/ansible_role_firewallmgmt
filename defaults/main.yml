@@ -1,2 +1,13 @@
 ---
 # defaults file for ansible_role_firewallpolicy
+
+#   access_token: "{{ access_token }}"
+#   vdom: "{{ item_policy.device
+#   state: "{{ item_policy.state }}"
+#   action: "{{ item_policy.action }}"
+#   nat: "{{ item_policy.nat }}"
+#   status: "{{ item_policy.status }}"
+#   policyid: "{{ item_policy.id }}"
+#   name: "{{ item_policy.name }}"
+
+before_policy: 0
