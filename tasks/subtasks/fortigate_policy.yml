@@ -44,3 +44,4 @@
       jsonbody: '{}'
       specialparams: action=move&before={{ before_policy }}&vdom={{ vdom }}
   when: result_first_task is failed  # Run only if the first task fails
+  ignore_errors: yes            # Continue even if the task fails
