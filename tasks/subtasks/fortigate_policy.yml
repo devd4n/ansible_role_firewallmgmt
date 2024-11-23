@@ -2,7 +2,7 @@
 - name: Configuring firewall policy for Testing the automation
   fortinet.fortios.fortios_firewall_policy:
     access_token: "{{ access_token }}"
-    vdom: "{{ item_policy.device.split('%') | second }}"
+    vdom: "{{ item_policy.device.split('%')[1] }}"
     state: "{{ item_policy.state }}"
     enable_log: true
     firewall_policy:
