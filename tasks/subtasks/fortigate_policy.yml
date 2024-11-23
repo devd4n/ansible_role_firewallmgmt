@@ -25,7 +25,7 @@
 
 - name: Move Policies
   fortinet.fortios.fortios_firewall_policy:
-    access_token: "{{ password }}"
+    access_token: "{{ access_token }}"
     vdom: "{{ item_policy.device.split('%') | second }}"
     state: "present"
     action: move
