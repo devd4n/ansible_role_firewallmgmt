@@ -26,7 +26,7 @@
 - name: Move Policies
   fortinet.fortios.fortios_firewall_policy:
     access_token: "{{ access_token }}"
-    vdom: "{{ item_policy.device.split('%') | second }}"
+    vdom: "{{ item_policy.device.split('%')[1] }}"
     state: "present"
     action: move
     self: "{{ item_policy.uid }}"
@@ -37,7 +37,7 @@
 # https://github.com/fortinet-ansible-dev/ansible-galaxy-fortios-collection/issues/353
 - name: Workaround for moving policies cause of bug in version 2.3.8 fortios
   fortinet.fortios.fortios_json_generic:
-    vdom: "{{ item_policy.device.split('%') | second }}"
+    vdom: "{{ item_policy.device.split('%')[1] }}"
     json_generic:
       method: PUT
       path: "/api/v2/cmdb/firewall/policy/{{ item_policy.id }}"
