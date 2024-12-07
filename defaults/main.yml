@@ -10,4 +10,13 @@
 #   policyid: "{{ item_policy.id }}"
 #   name: "{{ item_policy.name }}"
 
-before_policy: 0
+item_policy.location_before: 0
+item_policy.polname: 'default'
+item_policy.category: 'unkown'
+item_policy.state: 'present'
+item_policy.device: 'unknown'
+item_policy.name: 'unkown'
+item_policy.uid: '0'
+item_policy.nat: 'disable'
+item_policy.status: 'disable'
+item_policy.action: 'accept'
