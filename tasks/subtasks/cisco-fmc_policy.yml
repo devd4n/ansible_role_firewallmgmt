@@ -1,6 +1,5 @@
 ---
 # REQUIRED: pip install urllib3
-# REQUIRED: pip install jmespath
 
 #- name: Include needed variables
 #  include_vars: cisco-fmc_policy.yml
@@ -23,73 +22,6 @@
     filters:
       name: '{{ item_policy.polname }}'
     register_as: accesspolicy
-
-
-- name: Authenticate with Cisco FMC
-  uri:
-    url: "https://{{ ansible_host }}/api/fmc_platform/v1/auth/generatetoken"
-    method: POST
-    headers:
-      Content-Type: "application/json"
-    user: "{{ ansible_user }}"
-    password: "{{ ansible_password }}"
-    force_basic_auth: yes
-    status_code: 204
-    validate_certs: no
-  register: auth_response
-  #no_log: true # enable this to hide secrets like the auth-cookie
-
-
-- name: Get list of devices
-  uri:
-    url: "https://{{ ansible_host }}/api/fmc_config/v1/domain/{{ domain[0].uuid }}/devices/devicerecords"
-    method: GET
-    headers:
-      X-auth-access-token: "{{ auth_response.x_auth_access_token }}"
-      Content-Type: "application/json"
-    validate_certs: no
-  register: devices_response
-
-
-- name: Display Device IDs
-  debug:
-    msg: "{{ query_expression}}"
-    #msg: "{{ devices_response.json.items | json_query(query_expression) }}"
-  vars:
-    query_expression: "[?name=='{{ inventory_hostname }}']"
-
-
-- name: Check the structure of devices_response.json.items
-  debug:
-    var: devices_response.json.items
-
-- name: Check the structure of devices_response.json.items
-  debug:
-    msg: "{{ devices_response.json['items'] }}"
-
-- name: Extract ID for a specific name
-  set_fact:
-    device_id: "{{ devices_response.json['items'] | selectattr('name', 'equalto', inventory_hostname) | map(attribute='id') | first }}" #  
-
-
-#- name: Display Device IDs
-#  debug:
-#    msg: "{{ devices_response.json.items | json_query('[?name==`' + inventory_hostname + '`].id') }}" #  | json_query('[].{name: name, id: id}')
-
-- name: Fetch route details
-  uri:
-    url: "https://{{ ansible_host }}/api/fmc_config/v1/domain/{{ domain[0].uuid }}/devices/devicerecords/{{ device_id }}/routing/routes"
-    method: GET
-    headers:
-      X-auth-access-token: "{{ auth_response.x_auth_access_token }}"
-      Content-Type: "application/json"
-    return_content: yes
-    validate_certs: no
-  register: route_details
-- name: Display routes
-  debug:
-    msg: "{{ route_details.json }}"
-
 
 - name: Create an access rule allowing trafic from Cisco DevNet
   cisco.fmcansible.fmc_configuration:
