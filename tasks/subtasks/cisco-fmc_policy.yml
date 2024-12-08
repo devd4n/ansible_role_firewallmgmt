@@ -60,7 +60,7 @@
 
 - name: Extract ID for a specific name
   set_fact:
-    device_id: "{{ devices_response.json.items | selectattr('name', 'equalto', inventory_hostname) }}" #  | map(attribute='id') | first
+    device_id: "{{ devices_response.json.items | selectattr('name', 'equalto', inventory_hostname) | map(attribute='id') | first }}" #  
 
 
 #- name: Display Device IDs
