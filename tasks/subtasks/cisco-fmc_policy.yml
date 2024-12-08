@@ -53,7 +53,7 @@
 
 - name: Display Device IDs
   debug:
-    msg: "{{ devices_response.json.items | json_query(query_expression) }}"
+    msg: "{{ devices_response.json.items | json_query(query_expression) | first }}"
   vars:
     query_expression: "[?name=='{{ inventory_hostname }}'].id"
 
