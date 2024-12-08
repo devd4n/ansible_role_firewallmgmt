@@ -23,6 +23,49 @@
       name: '{{ item_policy.polname }}'
     register_as: accesspolicy
 
+
+- name: Authenticate with Cisco FMC
+  uri:
+    url: "https://{{ ansible_host }}/api/fmc_platform/v1/auth/generatetoken"
+    method: POST
+    headers:
+      Content-Type: "application/json"
+    user: "{{ ansible_user }}"
+    password: "{{ ansible_password }}"
+    force_basic_auth: yes
+    status_code: 204
+  register: auth_response
+  no_log: true
+
+
+- name: Get list of devices
+  uri:
+    url: "https://{{ ansible_host }}/api/fmc_config/v1/domain/{{ domain[0].uuid }}/devices/devicerecords"
+    method: GET
+    headers:
+      X-auth-access-token: "{{ auth_response.set_cookie }}"
+      Content-Type: "application/json"
+    validate_certs: no
+  register: devices_response
+
+- name: Display Device IDs
+  debug:
+    msg: "{{ devices_response.json.items | json_query('[].{name: name, id: id}') }}"
+
+- name: Fetch route details
+  uri:
+    url: "https://{{ ansible_host }}/api/fmc_config/v1/domain/{{ domain[0].uuid }}/devices/devicerecords/1/routing"
+    method: GET
+    headers:
+      X-auth-access-token: "{{ auth_response.set_cookie }}"
+      Content-Type: "application/json"
+    return_content: yes
+  register: route_details
+- name: Display routes
+  debug:
+    msg: "{{ route_details.json }}"
+
+
 - name: Create an access rule allowing trafic from Cisco DevNet
   cisco.fmcansible.fmc_configuration:
     operation: upsertAccessRule
