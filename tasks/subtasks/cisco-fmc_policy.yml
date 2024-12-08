@@ -34,6 +34,7 @@
     password: "{{ ansible_password }}"
     force_basic_auth: yes
     status_code: 204
+    validate_certs: no
   register: auth_response
   #no_log: true # enable this to hide secrets like the auth-cookie
 
