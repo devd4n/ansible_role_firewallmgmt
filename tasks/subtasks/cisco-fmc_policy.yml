@@ -78,7 +78,7 @@
 
 - name: Fetch route details
   uri:
-    url: "https://{{ ansible_host }}/api/fmc_config/v1/domain/{{ domain[0].uuid }}/devices/devicerecords/1/routing"
+    url: "https://{{ ansible_host }}/api/fmc_config/v1/domain/{{ domain[0].uuid }}/devices/devicerecords/{{ device_id }}/routing"
     method: GET
     headers:
       X-auth-access-token: "{{ auth_response.x_auth_access_token }}"
