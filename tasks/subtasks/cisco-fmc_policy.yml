@@ -58,6 +58,11 @@
   vars:
     query_expression: "[?name=='{{ inventory_hostname }}']"
 
+
+- name: Check the structure of devices_response.json.items
+  debug:
+    var: devices_response.json.items
+
 - name: Extract ID for a specific name
   set_fact:
     device_id: "{{ devices_response.json.items | selectattr('name', 'equalto', inventory_hostname) | map(attribute='id') | first }}" #  
