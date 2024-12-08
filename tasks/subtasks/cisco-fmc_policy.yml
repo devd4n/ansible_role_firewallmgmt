@@ -65,7 +65,7 @@
 
 - name: Check the structure of devices_response.json.items
   debug:
-    msg: "{{ devices_response.json.items() }}"
+    msg: "{{ devices_response }}"
 
 - name: Extract ID for a specific name
   set_fact:
