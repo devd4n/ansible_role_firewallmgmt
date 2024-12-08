@@ -1,4 +1,5 @@
 ---
+# REQUIRED: pip install urllib3
 
 #- name: Include needed variables
 #  include_vars: cisco-fmc_policy.yml
@@ -29,7 +30,7 @@
       name: AllowCiscoTraffic8
       type: accessrule
       action: ALLOW # ALLOW | TRUST | BLOCK | MONITOR | BLOCK_RESET | BLOCK_INTERACTIVE | BLOCK_RESET_INTERACTIVE
-      sendEventsToFMC : true
+      #sendEventsToFMC : true
       commentHistoryList : 
         - date: 0
           comment: "unkown comment"
