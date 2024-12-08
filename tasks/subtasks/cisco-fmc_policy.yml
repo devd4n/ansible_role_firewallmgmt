@@ -50,9 +50,17 @@
     validate_certs: no
   register: devices_response
 
+
 - name: Display Device IDs
   debug:
-    msg: "{{ devices_response.json.items | json_query('[?name==`' + inventory_hostname + '`].id') }}" #  | json_query('[].{name: name, id: id}')
+    msg: "{{ devices_response.json.items | json_query(query_expression) }}"
+  vars:
+    query_expression: "[?name=='{{ inventory_hostname }}'].id"
+
+
+#- name: Display Device IDs
+#  debug:
+#    msg: "{{ devices_response.json.items | json_query('[?name==`' + inventory_hostname + '`].id') }}" #  | json_query('[].{name: name, id: id}')
 
 - name: Fetch route details
   uri:
