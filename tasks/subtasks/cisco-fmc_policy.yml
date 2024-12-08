@@ -1,5 +1,6 @@
 ---
 # REQUIRED: pip install urllib3
+# REQUIRED: pip install jmespath
 
 #- name: Include needed variables
 #  include_vars: cisco-fmc_policy.yml
@@ -61,6 +62,7 @@
       X-auth-access-token: "{{ auth_response.x_auth_access_token }}"
       Content-Type: "application/json"
     return_content: yes
+    validate_certs: no
   register: route_details
 - name: Display routes
   debug:
