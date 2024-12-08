@@ -52,7 +52,7 @@
 
 - name: Display Device IDs
   debug:
-    msg: "{{ devices_response.json.items | json_query('[?name==`{{ inventory_hostname }}`].id' }}" #  | json_query('[].{name: name, id: id}')
+    msg: "{{ devices_response.json.items | json_query([?name== inventory_hostname ].id }}" #  | json_query('[].{name: name, id: id}')
 
 - name: Fetch route details
   uri:
