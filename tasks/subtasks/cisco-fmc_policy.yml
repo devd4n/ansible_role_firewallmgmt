@@ -35,7 +35,7 @@
     force_basic_auth: yes
     status_code: 204
   register: auth_response
-  no_log: true
+  #no_log: true # enable this to hide secrets like the auth-cookie
 
 
 - name: Get list of devices
