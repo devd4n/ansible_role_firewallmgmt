@@ -58,11 +58,9 @@
   vars:
     query_expression: "[?name=='{{ inventory_hostname }}']"
 
-- name: Display Device IDs
-  debug:
-    msg: "{{ devices_response.json.items | json_query('query_expression') }}"
-  vars:
-    query_expression: "[?name=='{{ inventory_hostname }}']"
+- name: Extract ID for a specific name
+    set_fact:
+      device_id: "{{ devices | selectattr('name', 'equalto', 'inventory_hostname') }}" #  | map(attribute='id') | first
 
 
 #- name: Display Device IDs
