@@ -51,7 +51,7 @@
     vdom: "{{ item_policy.device.split('%')[1] }}"
     state: "present"
     action: move
-    self: "{{ item_policy.uid | int }}"
+    self: "{{ item_policy.uid }}"
     before: "{{ item_policy.location_before | default(firewallpolicies_defaults.location_before) }}"
   register: result_first_task   # Register result of the first task
   ignore_errors: yes            # Continue even if the task fails
