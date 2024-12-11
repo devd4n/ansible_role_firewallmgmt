@@ -43,7 +43,7 @@
       status: "{{ item_policy.status }}"
       policyid: "{{ item_policy.uid }}"
       name: "{{ item_policy.name }}"
-  when: "{{ item_policy.uid }}" not '0'
+  when: item_policy.uid != '0'
 
 - name: Configuring firewall policy {{item_policy.uid}} {{ item_policy.name }} on {{ inventory_hostname }}
   fortinet.fortios.fortios_firewall_policy:
@@ -63,7 +63,7 @@
       status: "{{ item_policy.status }}"
       #policyid: "{{ 0 if item_policy.uid == '0' else item_policy.uid }}"
       name: "{{ item_policy.name }}"
-  when: "{{ item_policy.uid }}" == '0'
+  when: item_policy.uid == '0'
 
 - name: Move Policies
   fortinet.fortios.fortios_firewall_policy:
