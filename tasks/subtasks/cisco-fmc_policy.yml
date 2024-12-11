@@ -46,8 +46,8 @@
       #sendEventsToFMC : true
       sourceZones: 
         objects: 
-          - id: "seczone[0].id"
-            name: "seczone[0].name"
+          - id: "{{ seczone[0].id }}"
+            name: "{{ seczone[0].name }}"
             type: "SecurityZone"
       commentHistoryList : 
         - date: 0
