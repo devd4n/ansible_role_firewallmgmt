@@ -15,7 +15,7 @@
     register_as: domain
 
 - name: Get Security Zone Object
-cisco.fmcansible.fmc_configuration:
+  cisco.fmcansible.fmc_configuration:
   operation: "getAllSecurityZoneObject"
   path_params:
       domainUUID: "{{ domain[0].uuid }}"
