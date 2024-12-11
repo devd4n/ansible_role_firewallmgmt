@@ -52,7 +52,7 @@
     state: "present"
     action: move
     self: "{{ item_policy.uid }}"
-    before: "{{ item_policy.location_before }}"
+    before: "{{ item_policy.location_before | default(firewallpolicies_defaults.location_before) }}"
   register: result_first_task   # Register result of the first task
   ignore_errors: yes            # Continue even if the task fails
 
@@ -64,6 +64,6 @@
       method: PUT
       path: "/api/v2/cmdb/firewall/policy/{{ item_policy.uid }}"
       jsonbody: '{}'
-      specialparams: action=move&before={{ item_policy.location_before }}&vdom={{ vdom }}
+      specialparams: action=move&before={{ item_policy.location_before | default(firewallpolicies_defaults.location_before) }}&vdom={{ vdom }}
   when: result_first_task is failed  # Run only if the first task fails
   ignore_errors: yes            # Continue even if the task fails
