@@ -4,6 +4,11 @@
     msg: "Device type: {{ devicetype }}"
   #no_log: true
 
+- name: Check ansible_network_os
+  debug:
+    var: ansible_network_os
+  #no_log: true
+
 # tasks file for ansible_role_firewallpolicy
 - name: implement firewallpolicies
   include_tasks: firewallpolicy.yml
