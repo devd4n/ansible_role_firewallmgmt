@@ -32,12 +32,12 @@
     state: "{{ item_policy.state }}"
     enable_log: true
     firewall_policy:
-      srcintf: "{{ srczone }}"
-      dstintf: "{{ dstzone }}"
-      srcaddr: "{{ srcobj }}"
-      dstaddr: "{{ dstobj }}"
+    #  srcintf: "{{ srczone }}"
+    #  dstintf: "{{ dstzone }}"
+    #  srcaddr: "{{ srcobj }}"
+    #  dstaddr: "{{ dstobj }}"
       schedule: "always"
-      service: "{{ services }}"
+    #  service: "{{ services }}"
       action: "{{ item_policy.action }}"
       nat: "{{ item_policy.nat }}"
       status: "{{ item_policy.status }}"
