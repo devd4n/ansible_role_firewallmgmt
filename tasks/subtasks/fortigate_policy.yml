@@ -41,7 +41,7 @@
       action: "{{ item_policy.action }}"
       nat: "{{ item_policy.nat }}"
       status: "{{ item_policy.status }}"
-      policyid: "{{ None if item_policy.uid == '0' else item_policy.uid }}"
+      policyid: "{{ null if item_policy.uid == '0' else item_policy.uid }}"
       name: "{{ item_policy.name }}"
 
 - name: Move Policies
