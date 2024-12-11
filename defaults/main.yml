@@ -2,29 +2,29 @@
 # defaults file for ansible_role_firewallpolicy
 
 #   access_token: "{{ access_token }}"
-#   vdom: "{{ item_policy.device
-#   state: "{{ item_policy.state }}"
-#   action: "{{ item_policy.action }}"
-#   nat: "{{ item_policy.nat }}"
-#   status: "{{ item_policy.status }}"
-#   policyid: "{{ item_policy.id }}"
-#   name: "{{ item_policy.name }}"
+#   vdom: "{{   - device
+#   state: "{{   - state }}"
+#   action: "{{   - action }}"
+#   nat: "{{   - nat }}"
+#   status: "{{   - status }}"
+#   policyid: "{{   - id }}"
+#   name: "{{   - name }}"
 
-
-item_policy.state: 'present'
-item_policy.device: 'unknown'
-item_policy.polname: 'default'
-item_policy.category: 'unkown'
-item_policy.name: 'unkown'
-item_policy.uid: '0'
-item_policy.srczone: ['any']
-item_policy.dstzone: ['any']
-item_policy.srcobj: ['any']
-item_policy.dstobj: ['any']
-item_policy.services: ['any']
-item_policy.apps: ['any']
-item_policy.ips: ['any']
-item_policy.nat: 'disable'
-item_policy.status: 'disable'
-item_policy.action: 'accept'
-item_policy.location_before: 0
+firewallpolicies_defaults:
+  - state: 'present'
+  - device: 'unknown'
+  - polname: 'default'
+  - category: 'unkown'
+  - name: 'unkown'
+  - uid: '0'
+  - srczone: ['any']
+  - dstzone: ['any']
+  - srcobj: ['any']
+  - dstobj: ['any']
+  - services: ['any']
+  - apps: ['any']
+  - ips: ['any']
+  - nat: 'disable'
+  - status: 'disable'
+  - action: 'accept'
+  - location_before: 0
