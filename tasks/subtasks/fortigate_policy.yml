@@ -1,8 +1,26 @@
 ---
-- name: Transformiere Listen zu Dictionary-Lists
+# Changes a list of strings like ['sourceobj1', 'sourceobj2']
+# to a list of dicts like [{'name': 'sourceobj1'}, {'name': 'sourceobj2'}]
+- name: Transform Lists to list of dictionaries with name-value pairs
   set_fact:
-    item_policy.srczone: >
+    srczone: >
       [{% for item in item_policy.srczone %}
+      {"name": "{{ item }}"}{% if not loop.last %}, {% endif %}
+      {% endfor %}]
+    dstzone: >
+      [{% for item in item_policy.dstzone %}
+      {"name": "{{ item }}"}{% if not loop.last %}, {% endif %}
+      {% endfor %}]
+    srcobj: >
+      [{% for item in item_policy.srcobj %}
+      {"name": "{{ item }}"}{% if not loop.last %}, {% endif %}
+      {% endfor %}]
+    dstobj: >
+      [{% for item in item_policy.dstobj %}
+      {"name": "{{ item }}"}{% if not loop.last %}, {% endif %}
+      {% endfor %}]
+    services: >
+      [{% for item in item_policy.services %}
       {"name": "{{ item }}"}{% if not loop.last %}, {% endif %}
       {% endfor %}]
   #no_log: true
@@ -16,14 +34,14 @@
     firewall_policy:
       srcintf: "{{ srczone }}"
       dstintf:
-        - name: "any"
+        - name: "{{ dstzone }}"
       srcaddr:
-        - name: "all"
+        - name: "{{ srcobj }}"
       dstaddr:
-        - name: "all"
+        - name: "{{ dstobj }}"
       schedule: "always"
       service:
-        - name: "ALL"
+        - name: "{{ services }}"
       action: "{{ item_policy.action }}"
       nat: "{{ item_policy.nat }}"
       status: "{{ item_policy.status }}"
