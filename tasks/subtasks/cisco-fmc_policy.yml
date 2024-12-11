@@ -12,7 +12,7 @@
 - name: Get Domain
   cisco.fmcansible.fmc_configuration:
     operation: getAllDomain
-    register_as: domain
+    register: domain
 
 - name: Get Access Policy
   cisco.fmcansible.fmc_configuration:
