@@ -46,7 +46,7 @@
     #  dstintf: "{{ dstzone }}"
     #  srcaddr: "{{ srcobj }}"
     #  dstaddr: "{{ dstobj }}"
-      schedule: "always"
+      #schedule: "always"
     #  service: "{{ services }}"
       action: "{{ item_policy.action }}"
       nat: "{{ item_policy.nat }}"
