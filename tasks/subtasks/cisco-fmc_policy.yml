@@ -14,27 +14,18 @@
     operation: getAllDomain
     register_as: domain
 
-- name: Retrieve all interfaces from FMC
-  cisco.fmcansible.fmc_configuration:
-    operation: getAllSecurityZone
-    path_params:
-      domainUUID: '{{ domain[0].uuid }}'
-  register: interfaces_response
+- name: Get Security Zone Object
+cisco.fmcansible.fmc_configuration:
+  operation: "getAllSecurityZoneObject"
+  path_params:
+      domainUUID: "{{ domain[0].uuid }}"
+  filters:
+    name: 'External'
+  register_as: seczone
 
-- name: Show the SecurityZones
+- name: Show the seczone
   debug:
-    msg: "Interface ID: {{ interfaces_response }}"
-
-
-- name: Find the interface ID by name
-  set_fact:
-    interface_id: "{{ item.id }}"
-  loop: "{{ interfaces_response.fmc.objects }}"
-  when: item.name == 'External'
-
-- name: Show the interface ID
-  debug:
-    msg: "Interface ID: {{ interface_id }}"
+    msg: "seczone: {{ seczone }}"
 
 - name: Get Access Policy
   cisco.fmcansible.fmc_configuration:
