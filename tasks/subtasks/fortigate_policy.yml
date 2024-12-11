@@ -1,7 +1,7 @@
 ---
 - name: Transformiere Listen zu Dictionary-Lists
   set_fact:
-    item_policy.srczone: "{{ srczone | map('dict', 'name') | list }}"
+    srczone: "{{ item_policy.srczone | map('dict', 'name') | list }}"
 
 - name: Configuring firewall policy for Testing the automation
   fortinet.fortios.fortios_firewall_policy:
