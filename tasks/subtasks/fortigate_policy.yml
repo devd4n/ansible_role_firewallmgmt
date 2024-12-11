@@ -62,7 +62,7 @@
     vdom: "{{ item_policy.device.split('%')[1] }}"
     json_generic:
       method: PUT
-      path: "/api/v2/cmdb/firewall/policy/{{ item_policy.uid | int }}"
+      path: "/api/v2/cmdb/firewall/policy/{{ item_policy.uid }}"
       jsonbody: '{}'
       specialparams: action=move&before={{ item_policy.location_before | default(firewallpolicies_defaults.location_before) }}&vdom={{ vdom }}
   when: result_first_task is failed  # Run only if the first task fails
