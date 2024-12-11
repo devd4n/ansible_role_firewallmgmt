@@ -13,15 +13,15 @@
       {% endfor %}]
     srcobj: >
       [{% for item in item_policy.srcobj | default(firewallpolicies_defaults.srcobj) %}
-      {"name": "{{ item }}"}{% if not loop.last %}, {% endif %}
+      {"name": "{{ 'all' if item == 'any' else item }}"}{% if not loop.last %}, {% endif %}
       {% endfor %}]
     dstobj: >
       [{% for item in item_policy.dstobj | default(firewallpolicies_defaults.dstobj) %}
-      {"name": "{{ item }}"}{% if not loop.last %}, {% endif %}
+      {"name": "{{ 'all' if item == 'any' else item }}"}{% if not loop.last %}, {% endif %}
       {% endfor %}]
     services: >
       [{% for item in item_policy.services | default(firewallpolicies_defaults.services) %}
-      {"name": "{{ item }}"}{% if not loop.last %}, {% endif %}
+      {"name": "{{ 'ALL' if item == 'any' else item }}"}{% if not loop.last %}, {% endif %}
       {% endfor %}]
   #no_log: true
 
