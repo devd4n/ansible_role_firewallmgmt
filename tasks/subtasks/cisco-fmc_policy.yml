@@ -9,6 +9,15 @@
 #    my_variable: "new_value"
 #  when: my_variable == "old_value"
 
+- name: Schreibe die Variable um, wenn eine Bedingung erfüllt ist
+  set_fact:
+    ansible_network_os: cisco.fmcansible.fmc 
+
+- name: Check ansible_network_os
+  debug:
+    var: ansible_network_os
+  #no_log: true
+  
 - name: Get Domain
   cisco.fmcansible.fmc_configuration:
     operation: getAllDomain

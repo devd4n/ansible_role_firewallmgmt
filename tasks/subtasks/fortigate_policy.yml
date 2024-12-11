@@ -1,4 +1,13 @@
 ---
+- name: Schreibe die Variable um, wenn eine Bedingung erfüllt ist
+  set_fact:
+    ansible_network_os: fortinet.fortios.fortios
+
+- name: Check ansible_network_os
+  debug:
+    var: ansible_network_os
+  #no_log: true
+
 # Changes a list of strings like ['sourceobj1', 'sourceobj2']
 # to a list of dicts like [{'name': 'sourceobj1'}, {'name': 'sourceobj2'}]
 - name: Transform Lists to list of dictionaries with name-value pairs
