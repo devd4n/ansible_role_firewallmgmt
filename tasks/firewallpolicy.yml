@@ -1,4 +1,5 @@
 ---
-- name: edit fortigate policy
+- name: Check match of Policy-Rule to Device
   include_tasks: "subtasks/{{ subtask }}"
   when: inventory_hostname == rule_device
+  no_log: True

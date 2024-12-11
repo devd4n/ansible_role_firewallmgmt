@@ -3,7 +3,7 @@
   debug:
     msg: "Device type: {{ devicetype }}"
   #no_log: true
-  
+
 # tasks file for ansible_role_firewallpolicy
 - name: implement firewallpolicies
   include_tasks: firewallpolicy.yml
@@ -13,6 +13,7 @@
   loop: "{{ firewallpolicies }}"
   loop_control:
     loop_var: item_policy
+  no_log: true
 
 
 
