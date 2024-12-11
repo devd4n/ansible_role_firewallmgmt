@@ -8,19 +8,19 @@
       {"name": "{{ item }}"}{% if not loop.last %}, {% endif %}
       {% endfor %}]
     dstzone: >
-      [{% for item in item_policy.dstzone | dstzone %}
+      [{% for item in item_policy.dstzone | default('dstzone') %}
       {"name": "{{ item }}"}{% if not loop.last %}, {% endif %}
       {% endfor %}]
     srcobj: >
-      [{% for item in item_policy.srcobj %}
+      [{% for item in item_policy.srcobj | default('srcobj') %}
       {"name": "{{ item }}"}{% if not loop.last %}, {% endif %}
       {% endfor %}]
     dstobj: >
-      [{% for item in item_policy.dstobj %}
+      [{% for item in item_policy.dstobj | default('dstobj') %}
       {"name": "{{ item }}"}{% if not loop.last %}, {% endif %}
       {% endfor %}]
     services: >
-      [{% for item in item_policy.services %}
+      [{% for item in item_policy.services | default('services') %}
       {"name": "{{ item }}"}{% if not loop.last %}, {% endif %}
       {% endfor %}]
   #no_log: true
