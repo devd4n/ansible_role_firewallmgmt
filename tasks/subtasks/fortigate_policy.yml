@@ -33,15 +33,11 @@
     enable_log: true
     firewall_policy:
       srcintf: "{{ srczone }}"
-      dstintf:
-        - name: "{{ dstzone }}"
-      srcaddr:
-        - name: "{{ srcobj }}"
-      dstaddr:
-        - name: "{{ dstobj }}"
+      dstintf: "{{ dstzone }}"
+      srcaddr: "{{ srcobj }}"
+      dstaddr: "{{ dstobj }}"
       schedule: "always"
-      service:
-        - name: "{{ services }}"
+      service: "{{ services }}"
       action: "{{ item_policy.action }}"
       nat: "{{ item_policy.nat }}"
       status: "{{ item_policy.status }}"
