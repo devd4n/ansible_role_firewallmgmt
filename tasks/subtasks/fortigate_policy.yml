@@ -1,12 +1,13 @@
 ---
 - name: Transformiere Listen zu Dictionary-Lists
   set_fact:
-    srczone: >
+    item_policy.srczone: >
       [{% for item in item_policy.srczone %}
       {"name": "{{ item }}"}{% if not loop.last %}, {% endif %}
       {% endfor %}]
+  #no_log: true
 
-- name: Configuring firewall policy for Testing the automation
+- name: Configuring firewall policy {{item_policy.uid}} {{ item_policy.name }} on {{ inventory_hostname }}
   fortinet.fortios.fortios_firewall_policy:
     access_token: "{{ access_token }}"
     vdom: "{{ item_policy.device.split('%')[1] }}"
