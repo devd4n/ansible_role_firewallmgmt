@@ -4,11 +4,11 @@
 - name: Transform Lists to list of dictionaries with name-value pairs
   set_fact:
     srczone: >
-      [{% for item in item_policy.srczone | default('srczone') %}
+      [{% for item in item_policy.srczone %}
       {"name": "{{ item }}"}{% if not loop.last %}, {% endif %}
       {% endfor %}]
     dstzone: >
-      [{% for item in item_policy.dstzone | default('dstzone') %}
+      [{% for item in item_policy.dstzone %}
       {"name": "{{ item }}"}{% if not loop.last %}, {% endif %}
       {% endfor %}]
     srcobj: >
