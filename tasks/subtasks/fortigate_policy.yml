@@ -32,16 +32,16 @@
     state: "{{ item_policy.state }}"
     enable_log: true
     firewall_policy:
-    srcintf:
-      - name: "any"
-    dstintf:
-      - name: "any"
-    srcaddr:
-      - name: "all"
-    dstaddr:
-      - name: "all"
-    service:
-      - name: "ALL"
+      srcintf:
+        - name: "any"
+      dstintf:
+        - name: "any"
+      srcaddr:
+        - name: "all"
+      dstaddr:
+        - name: "all"
+      service:
+        - name: "ALL"
     #  srcintf: "{{ srczone }}"
     #  dstintf: "{{ dstzone }}"
     #  srcaddr: "{{ srcobj }}"
