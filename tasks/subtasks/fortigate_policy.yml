@@ -1,8 +1,8 @@
 ---
 - name: Transformiere Listen zu Dictionary-Lists
-      set_fact:
-        item_policy.srczone: >-
-          {{ item_policy.srczone | map('regex_replace', '(.*)', {'name': '\\1'}) | list }}
+  set_fact:
+    item_policy.srczone: >-
+      {{ item_policy.srczone | map('regex_replace', '(.*)', {'name': '\\1'}) | list }}
 
 - name: Configuring firewall policy for Testing the automation
   fortinet.fortios.fortios_firewall_policy:
