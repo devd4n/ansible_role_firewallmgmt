@@ -31,12 +31,36 @@
       type: accessrule
       action: ALLOW # ALLOW | TRUST | BLOCK | MONITOR | BLOCK_RESET | BLOCK_INTERACTIVE | BLOCK_RESET_INTERACTIVE
       #sendEventsToFMC : true
+      sourceZones: 
+        objects: 
+          - name: "External"
+            type: "SecurityZone"
       commentHistoryList : 
         - date: 0
           comment: "unkown comment"
     path_params:
       containerUUID: '{{ accesspolicy[0].id }}'
       domainUUID: '{{ domain[0].uuid }}'
+
+
+#  "sourceZones": {
+#    "objects": [
+#      {
+#        "name": "External",
+#        "id": "SecurityZoneUUID",
+#        "type": "SecurityZone"
+#      }
+#    ]
+#  },
+#  "destinationZones": {
+#    "objects": [
+#      {
+#        "name": "Internal",
+#        "id": "SecurityZoneUUID",
+#        "type": "SecurityZone"
+#      }
+#    ]
+#  },
 
 
 #"newComments": [
@@ -85,24 +109,7 @@
 #      }
 #    ]
 #  },
-#  "sourceZones": {
-#    "objects": [
-#      {
-#        "name": "External",
-#        "id": "SecurityZoneUUID",
-#        "type": "SecurityZone"
-#      }
-#    ]
-#  },
-#  "destinationZones": {
-#    "objects": [
-#      {
-#        "name": "Internal",
-#        "id": "SecurityZoneUUID",
-#        "type": "SecurityZone"
-#      }
-#    ]
-#  },
+
 #  "sourcePorts": {
 #    "objects": [
 #      {

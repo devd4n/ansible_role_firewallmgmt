@@ -4,6 +4,10 @@
     msg: "Device type: {{ devicetype }}"
   #no_log: true
 
+# This checks the ansible_network_os variable. if connection: httpapi is defined in playbook
+# this will get problematic cause the ansible_network_os will be cached for all hosts
+# => all hosts will use the same ansible_network_os variable => generates error on hosts with another ansible_network_os
+# => Error: ... ConnectionError: Method not found ...
 - name: Check ansible_network_os
   debug:
     var: ansible_network_os
