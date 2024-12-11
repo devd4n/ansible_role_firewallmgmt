@@ -11,20 +11,20 @@
 #   name: "{{   - name }}"
 
 firewallpolicies_defaults:
-  - state: 'present'
-  - device: 'unknown'
-  - polname: 'default'
-  - category: 'unkown'
-  - name: 'unkown'
-  - uid: '0'
-  - srczone: ['any']
-  - dstzone: ['any']
-  - srcobj: ['any']
-  - dstobj: ['any']
-  - services: ['any']
-  - apps: ['any']
-  - ips: ['any']
-  - nat: 'disable'
-  - status: 'disable'
-  - action: 'accept'
-  - location_before: 0
+  state: 'present'
+  device: 'unknown'
+  polname: 'default'
+  category: 'unkown'
+  name: 'unkown'
+  uid: '0'
+  srczone: ['any']
+  dstzone: ['any']
+  srcobj: ['any']
+  dstobj: ['any']
+  services: ['any']
+  apps: ['any']
+  ips: ['any']
+  nat: 'disable'
+  status: 'disable'
+  action: 'accept'
+  location_before: 0
