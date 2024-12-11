@@ -14,6 +14,22 @@
     operation: getAllDomain
     register_as: domain
 
+- name: Retrieve all interfaces from FMC
+  cisco.fmcansible.fmc_configuration:
+    operation: get
+    object_type: object/interfaces
+  register: interfaces_response
+
+- name: Find the interface ID by name
+  set_fact:
+    interface_id: "{{ item.id }}"
+  loop: "{{ interfaces_response.fmc.objects }}"
+  when: item.name == 'External'
+
+- name: Show the interface ID
+  debug:
+    msg: "Interface ID: {{ interface_id }}"
+
 - name: Get Access Policy
   cisco.fmcansible.fmc_configuration:
     operation: getAllAccessPolicy
