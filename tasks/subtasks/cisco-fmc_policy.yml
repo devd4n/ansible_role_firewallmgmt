@@ -16,9 +16,15 @@
 
 - name: Retrieve all interfaces from FMC
   cisco.fmcansible.fmc_configuration:
-    operation: get
-    object_type: object/interfaces
+    operation: getAllSecurityZones
+    path_params:
+      domainUUID: '{{ domain[0].uuid }}'
   register: interfaces_response
+
+- name: Show the SecurityZones
+  debug:
+    msg: "Interface ID: {{ interfaces_response }}"
+
 
 - name: Find the interface ID by name
   set_fact:
