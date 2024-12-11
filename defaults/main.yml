@@ -27,4 +27,4 @@ firewallpolicies_defaults:
   nat: 'disable'
   status: 'disable'
   action: 'accept'
-  location_before: 0
+  location_before: '0'
