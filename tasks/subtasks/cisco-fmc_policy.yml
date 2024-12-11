@@ -16,12 +16,12 @@
 
 - name: Get Security Zone Object
   cisco.fmcansible.fmc_configuration:
-  operation: "getAllSecurityZoneObject"
-  path_params:
-      domainUUID: "{{ domain[0].uuid }}"
-  filters:
-    name: 'External'
-  register_as: seczone
+   operation: "getAllSecurityZoneObject"
+   path_params:
+       domainUUID: "{{ domain[0].uuid }}"
+   filters:
+     name: 'External'
+   register_as: seczone
 
 - name: Show the seczone
   debug:
