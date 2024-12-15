@@ -46,7 +46,7 @@
   cisco.fmcansible.fmc_configuration:
     operation: upsertAccessRule
     data:
-      name: AllowCiscoTraffic8
+      name: item_policy.name
       type: accessrule
       action: ALLOW # ALLOW | TRUST | BLOCK | MONITOR | BLOCK_RESET | BLOCK_INTERACTIVE | BLOCK_RESET_INTERACTIVE
       #sendEventsToFMC : true
