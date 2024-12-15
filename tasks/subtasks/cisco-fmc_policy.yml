@@ -26,12 +26,14 @@
    path_params:
        domainUUID: "{{ domain[0].uuid }}"
    filters:
-     name: 'External'
-   register_as: seczone
+     name: "{{ item }}"
+   #register_as: seczone
+  loop: "{{ item_policy.srczones }}"
+  register: sourcezone_results
 
-- name: Show the seczone
+- name: Show the sourcezone_results
   debug:
-    msg: "seczone: {{ seczone }}"
+    msg: "sourcezone_results: {{ sourcezone_results }}"
 
 - name: Get Access Policy
   cisco.fmcansible.fmc_configuration:
