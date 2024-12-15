@@ -28,12 +28,16 @@
    filters:
      name: "{{ item }}"
    #register_as: seczone
-  loop: "{{ item_policy.srczones }}"
+  loop: "{{ item_policy.srczone }}"
   register: sourcezone_results
+
+- name: Transform sourcezone_results into objects list
+  set_fact:
+    sourcezone_results_obj: "{{ sourcezone_results.results | map(attribute='response') | flatten | map('extract', ['id', 'name', 'type']) | list }}"
 
 - name: Show the sourcezone_results
   debug:
-    msg: "sourcezone_results: {{ sourcezone_results }}"
+    msg: "sourcezone_results_obj: {{ sourcezone_results_obj }}"
 
 - name: Get Access Policy
   cisco.fmcansible.fmc_configuration:
@@ -52,11 +56,11 @@
       type: accessrule
       action: ALLOW # ALLOW | TRUST | BLOCK | MONITOR | BLOCK_RESET | BLOCK_INTERACTIVE | BLOCK_RESET_INTERACTIVE
       #sendEventsToFMC : true
-      sourceZones: 
-        objects: 
-          - id: "{{ seczone[0].id }}"
-            name: "{{ seczone[0].name }}"
-            type: "SecurityZone"
+      sourceZones: sourcezone_results_obj
+        #objects: 
+        #  - id: "{{ seczone[0].id }}"
+        #    name: "{{ seczone[0].name }}"
+        #    type: "SecurityZone"
       commentHistoryList : 
         - date: 0
           comment: "unkown comment"
