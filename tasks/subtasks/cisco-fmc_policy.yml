@@ -97,7 +97,7 @@
 #######################################################################
 # EDIT FIREWALL-RULE
 #######################################################################
-- name: Create an access rule allowing trafic from Cisco DevNet
+- name: Create an access rule
   cisco.fmcansible.fmc_configuration:
     operation: upsertAccessRule
     data:
@@ -106,7 +106,7 @@
       action: ALLOW # ALLOW | TRUST | BLOCK | MONITOR | BLOCK_RESET | BLOCK_INTERACTIVE | BLOCK_RESET_INTERACTIVE
       #sendEventsToFMC : true
       sourceZones: 
-        objects: "{{ sourcezone_results_obj }}" 
+        objects: "{{ srczone_results_obj }}" 
         #objects: 
         #  - id: "{{ seczone[0].id }}"
         #    name: "{{ seczone[0].name }}"
