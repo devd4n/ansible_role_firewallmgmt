@@ -38,7 +38,13 @@
 
 - name: Transform sourcezone_results into objects list
   set_fact:
-    sourcezone_results_obj: "{{ sourcezone_results.results[0].response[0] | map('extract', ['id', 'name', 'type']) | list }}"
+    sourcezone_results_obj: >-
+      {{ 
+        sourcezone_results.results | 
+        subelements('response') | 
+        map('pick', ['name', 'id', 'type']) | 
+        list 
+      }}
 
 - name: Show the sourcezone_results
   debug:
