@@ -59,11 +59,11 @@
 
 - name: Show the sourcezone_results
   debug:
-    msg: "sourcezone_results: {{ sourcezone_results }}"
+    msg: "sourcezone_results: {{ sourcezone_results.results.response }}"
 
 - name: Transform sourcezone_results into objects list
   set_fact:
-    sourcezone_results_obj: "{{ sourcezone_results.results | map(attribute='response') | map('extract', ['id', 'name', 'type']) | list }}"
+    sourcezone_results_obj: "{{ sourcezone_results.results.response | map('extract', ['id', 'name', 'type']) | list }}"
 
 - name: Show the sourcezone_results
   debug:
