@@ -33,7 +33,18 @@
 
 - name: Transform sourcezone_results into objects list
   set_fact:
-    sourcezone_results_obj: "{{ sourcezone_results | from_json | json_query('[*].{name: name, id: id, type: type}') }}"
+    sourcezone_results_obj: >-
+      {% set result_list = [] %}
+      {% for item in sourcezone_results %}
+        {% if item is mapping and 'name' in item and 'id' in item %}
+          {% set _ = result_list.append({
+            'name': item.name, 
+            'id': item.id, 
+            'type': 'SecurityZone'
+          }) %}
+        {% endif %}
+      {% endfor %}
+      {{ result_list }}"
 
 - name: Show the sourcezone_results
   debug:
