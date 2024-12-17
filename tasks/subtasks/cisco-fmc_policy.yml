@@ -9,32 +9,6 @@
 #    my_variable: "new_value"
 #  when: my_variable == "old_value"
 
-# Changes a list of strings like ['sourceobj1', 'sourceobj2']
-# to a list of dicts like [{'name': 'sourceobj1'}, {'name': 'sourceobj2'}]
-- name: Transform Lists to list of dictionaries with name-value pairs
-  set_fact:
-    srczone: >
-      [{% for item in item_policy.srczone | default(firewallpolicies_defaults.srczone) %}
-      {"name": "{{ item }}"}{% if not loop.last %}, {% endif %}
-      {% endfor %}]
-    dstzone: >
-      [{% for item in item_policy.dstzone | default(firewallpolicies_defaults.dstzone) %}
-      {"name": "{{ item }}"}{% if not loop.last %}, {% endif %}
-      {% endfor %}]
-    srcobj: >
-      [{% for item in item_policy.srcobj | default(firewallpolicies_defaults.srcobj) %}
-      {"name": "{{ 'all' if item == 'any' else item }}"}{% if not loop.last %}, {% endif %}
-      {% endfor %}]
-    dstobj: >
-      [{% for item in item_policy.dstobj | default(firewallpolicies_defaults.dstobj) %}
-      {"name": "{{ 'all' if item == 'any' else item }}"}{% if not loop.last %}, {% endif %}
-      {% endfor %}]
-    services: >
-      [{% for item in item_policy.services | default(firewallpolicies_defaults.services) %}
-      {"name": "{{ 'ALL' if item == 'any' else item }}"}{% if not loop.last %}, {% endif %}
-      {% endfor %}]
-  #no_log: true
-
 - name: Get Domain
   cisco.fmcansible.fmc_configuration:
     operation: getAllDomain
