@@ -34,13 +34,13 @@
      name: "{{ item }}"
    #register_as: seczone
   loop: "{{ item_policy.srczone }}"
-  register: destzone_results
+  register: srczone_results
 
-- name: Transform destzone_results into objects list
+- name: Transform srczone_results into objects list
   set_fact:
-    destzone_results_obj: >-
+    srczone_results_obj: >-
       {{ 
-        destzone_results.results | 
+        srczone_results.results | 
         json_query('[*].response[*].{name: name, id: id, type: type}') | 
         flatten
       }}
@@ -106,6 +106,12 @@
       action: ALLOW # ALLOW | TRUST | BLOCK | MONITOR | BLOCK_RESET | BLOCK_INTERACTIVE | BLOCK_RESET_INTERACTIVE
       #sendEventsToFMC : true
       sourceZones: 
+        objects: "{{ sourcezone_results_obj }}" 
+        #objects: 
+        #  - id: "{{ seczone[0].id }}"
+        #    name: "{{ seczone[0].name }}"
+        #    type: "SecurityZone"
+      destinationZones:
         objects: "{{ destzone_results_obj }}" 
         #objects: 
         #  - id: "{{ seczone[0].id }}"
