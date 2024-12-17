@@ -66,7 +66,7 @@
       type: accessrule
       action: ALLOW # ALLOW | TRUST | BLOCK | MONITOR | BLOCK_RESET | BLOCK_INTERACTIVE | BLOCK_RESET_INTERACTIVE
       #sendEventsToFMC : true
-      sourceZones: sourcezone_results_obj
+      sourceZones: "{{ sourcezone_results_obj }}"
         #objects: 
         #  - id: "{{ seczone[0].id }}"
         #    name: "{{ seczone[0].name }}"
