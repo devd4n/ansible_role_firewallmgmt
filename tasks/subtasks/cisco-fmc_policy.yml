@@ -59,7 +59,7 @@
 
 - name: Transform sourcezone_results into objects list
   set_fact:
-    sourcezone_results_obj: "{{ sourcezone_results_obj | map(attribute='name') | zip(sourcezone_results_obj | map(attribute='id') | list) | map('combine', {'type': 'SecurityZone'}) | list }}"
+    sourcezone_results_obj: "{{ sourcezone_results | map(attribute='name') | zip(sourcezone_results_obj | map(attribute='id') | list) | map('combine', {'type': 'SecurityZone'}) | list }}"
 
 - name: Show the sourcezone_results
   debug:
