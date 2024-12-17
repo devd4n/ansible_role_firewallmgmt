@@ -25,10 +25,14 @@
       {% endfor %}]
   #no_log: true
 
+- name: Transform Lists to list of dictionaries with name-value pairs
+  set_fact:
+    vdom: "{{ item_policy.device.split('%')[1] }}"
+
 - name: Configuring firewall policy {{item_policy.uid}} {{ item_policy.name }} on {{ inventory_hostname }}
   fortinet.fortios.fortios_firewall_policy:
     access_token: "{{ access_token }}"
-    vdom: "{{ item_policy.device.split('%')[1] }}"
+    vdom: "{{ vdom }}"
     state: "{{ item_policy.state }}"
     enable_log: true
     firewall_policy:
@@ -48,7 +52,7 @@
 - name: Move Policies
   fortinet.fortios.fortios_firewall_policy:
     access_token: "{{ access_token }}"
-    vdom: "{{ item_policy.device.split('%')[1] }}"
+    vdom: "{{ vdom }}"
     state: "present"
     action: move
     self: "{{ item_policy.uid }}"
@@ -59,7 +63,7 @@
 # https://github.com/fortinet-ansible-dev/ansible-galaxy-fortios-collection/issues/353
 - name: Workaround for moving policies cause of bug in version 2.3.8 fortios
   fortinet.fortios.fortios_json_generic:
-    vdom: "{{ item_policy.device.split('%')[1] }}"
+    vdom: "{{ vdom }}"
     json_generic:
       method: PUT
       path: "/api/v2/cmdb/firewall/policy/{{ item_policy.uid }}"
