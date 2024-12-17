@@ -41,9 +41,7 @@
     sourcezone_results_obj: >-
       {{ 
         sourcezone_results.results | 
-        subelements('response') | 
-        map('pick', ['name', 'id', 'type']) | 
-        list 
+        json_query('[*].response[*].{name: name, id: id, type: type}') 
       }}
 
 - name: Show the sourcezone_results
