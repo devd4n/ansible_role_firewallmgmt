@@ -33,7 +33,7 @@
 
 - name: Transform sourcezone_results into objects list
   set_fact:
-    sourcezone_results_obj: "{{ sourcezone_results_obj | from_json | json_query('[*].{name: name, id: id, type: type}') }}"
+    sourcezone_results_obj: "{{ sourcezone_results | from_json | json_query('[*].{name: name, id: id, type: type}') }}"
 
 - name: Show the sourcezone_results
   debug:
