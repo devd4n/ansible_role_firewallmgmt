@@ -41,7 +41,8 @@
     sourcezone_results_obj: >-
       {{ 
         sourcezone_results.results | 
-        json_query('[*].response[*].{name: name, id: id, type: type}') 
+        json_query('[*].response[*].{name: name, id: id, type: type}') | 
+        flatten
       }}
 
 - name: Show the sourcezone_results
